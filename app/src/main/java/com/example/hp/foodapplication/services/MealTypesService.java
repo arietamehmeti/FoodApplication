@@ -22,9 +22,9 @@ public class MealTypesService extends IntentService {
 
     public static final String ACTION_GET_MEAL_TYPES_RESULT = "com.example.hp.foodapplication.services.GET_MEAL_TYPES_RESULT";
 
-    private static final String LOG_TAG = "StudentService";
+    private static final String LOG_TAG = "MealTypesService";
 
-    public static final String EXTRA_MEAL_TYPES_RESULT = "students.result";
+    public static final String EXTRA_MEAL_TYPES_RESULT = "meal.result";
 
     private static final String GET_MEAL_TYPES_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types";
 

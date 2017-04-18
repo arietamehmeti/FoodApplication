@@ -27,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
     // To save on resources only return the column values that you actually need.
     private static final String[] PROJECTION = {
             MealsNetworkContract.MealType._ID,
-            MealsNetworkContract.MealType.COLUMN_MEALTYPE_TITLE
+            MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_TITLE
     };
 
     private final static String[] FROM_COLUMNS = {
-            MealsNetworkContract.MealType.COLUMN_MEALTYPE_TITLE
+            MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_TITLE
      };
 
     private final static int[] TO_IDS = {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
      };
 
     // How you want the results sorted in the resulting Cursor
-    private static final String SORT_ORDER = MealsNetworkContract.MealType.COLUMN_MEALTYPE_PRIORITY + " ASC";
+    private static final String SORT_ORDER = MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_PRIORITY + " ASC";
 
 
     private MealsNetworkDb dbHelper;

@@ -13,8 +13,8 @@ public final class MealsNetworkContract {
     }
     public static abstract class MealType implements BaseColumns {
         public static final String TABLE_NAME = "meal_type";
-        public static final String COLUMN_MEALTYPE_TITLE = "type_title";
-        public static final String COLUMN_MEALTYPE_PRIORITY = "priority";
+        public static final String COLUMN_MEAL_TYPE_TITLE = "type_title";
+        public static final String COLUMN_MEAL_TYPE_PRIORITY = "priority";
     }
     public static abstract class Meal implements BaseColumns {
         public static final String TABLE_NAME = "meal";
