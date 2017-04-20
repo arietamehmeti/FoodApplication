@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "MainActivity";
 
     private static final String[] PROJECTION = {
-            MealsNetworkContract.MealType._ID,
             MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_TITLE,
             MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_PRIORITY
     };
@@ -71,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         db = new MealsNetworkDb(this);
 
-        getAllMealTypes();
+//        getAllMealTypes();
+        getAllMealTypesfromDB();
     }
 
     @Override
@@ -117,36 +117,40 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "New record inserted - ID " + newRowId, Toast.LENGTH_SHORT).show();
     }
 
-//    private void getAllStudents() {
-//        SQLiteDatabase db = dbHelper.getReadableDatabase();
-//
-//        Cursor cursor = db.query(
-//                StudentManagementContract.Student.TABLE_NAME,           // The table to query
-//                PROJECTION,                                             // The columns to return
-//                null,                                                   // The columns for the WHERE clause
-//                null,                                                   // The values for the WHERE clause
-//                null,                                                   // don't group the rows
-//                null,                                                   // don't filter by row groups
-//                SORT_ORDER                                              // The sort order
-//        );
-//
-//        String result = "";
-//
-//        int firstNameColumn = cursor.getColumnIndexOrThrow(StudentManagementContract.Student.COLUMN_NAME_FIRST_NAME);
-//        int lastNameColumn = cursor.getColumnIndexOrThrow(StudentManagementContract.Student.COLUMN_NAME_LAST_NAME);
-//        while (cursor.moveToNext()) {
+    private void getAllMealTypesfromDB() {
+        SQLiteDatabase dbHelper = db.getReadableDatabase();
+
+        Cursor cursor = dbHelper.query(
+                MealsNetworkContract.MealType.TABLE_NAME,           // The table to query
+                PROJECTION,                                             // The columns to return
+                null,                                                   // The columns for the WHERE clause
+                null,                                                   // The values for the WHERE clause
+                null,                                                   // don't group the rows
+                null,                                                   // don't filter by row groups
+                SORT_ORDER                                              // The sort order
+        );
+
+        String result = "";
+
+        int firstNameColumn = cursor.getColumnIndexOrThrow(MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_TITLE);
+        int lastNameColumn = cursor.getColumnIndexOrThrow(MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_PRIORITY);
+
+
+        while (cursor.moveToNext()) {
+            Log.d(LOG_TAG, "row : " + cursor.getString(firstNameColumn) + " ----- " + cursor.getString(lastNameColumn));
+
 //            String firstName = cursor.getString(firstNameColumn);
 //            String lastName = cursor.getString(lastNameColumn);
 //
 //            result += firstName + "\t" + lastName + "\n";
-//        }
+        }
 //
 //        TextView resultsTextView = (TextView) findViewById(R.id.tv_results);
 //        resultsTextView.setText(result);
 //
-//        cursor.close();
-//    }
-//
+        cursor.close();
+    }
+
 
 
 
