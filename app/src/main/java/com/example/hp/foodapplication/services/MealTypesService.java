@@ -18,35 +18,36 @@ import java.net.URL;
 
 public class MealTypesService extends IntentService {
 
-    public static final String ACTION_GET_MEAL_TYPES = "com.example.hp.foodapplication.services.GET_MEAL_TYPES";
+    private static final String LOG_TAG = "StudentService";
 
-    public static final String ACTION_GET_MEAL_TYPES_RESULT = "com.example.hp.foodapplication.services.GET_MEAL_TYPES_RESULT";
+    public static final String ACTION_GET_MEAL_TYPES= "com.example.hp.foodapplication.GET_MEAL_TYPES";
 
-    private static final String LOG_TAG = "MealTypesService";
+    public static final String ACTION_GET_MEAL_TYPES_RESULT = "com.example.hp.foodapplication.GET_MEAL_TYPES_RESULT";
 
-    public static final String EXTRA_MEAL_TYPES_RESULT = "meal.result";
+    public static final String EXTRA_MEAL_TYPES_RESULT = "mealTypes.result";
 
     private static final String GET_MEAL_TYPES_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types";
 
-    public MealTypesService() {
+
+    public MealTypesService(){
         super("Meal Types Service");
     }
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        Log.d(LOG_TAG, "onhandle intent");
+        Log.d(LOG_TAG, "on handle intent - service" );
 
         String action = intent.getAction();
         if (ACTION_GET_MEAL_TYPES.equals(action)) {
-            Log.d(LOG_TAG, "" +action);
-
             getMealTypes(intent);
         } else {
             throw new UnsupportedOperationException("No implementation for action " + action);
         }
     }
 
-    private void getMealTypes(Intent intent){
+    private void getMealTypes(Intent intent) {
+        Log.d(LOG_TAG, "get meal typs mtd" );
+
         InputStream is = null;
 
         try {
@@ -61,14 +62,15 @@ public class MealTypesService extends IntentService {
             conn.connect();
 
             int response = conn.getResponseCode();
-            is = conn.getInputStream();
             Log.d(LOG_TAG, "The response is: " + response);
+            is = conn.getInputStream();
 
             // Convert the InputStream into a bitmap
             String result = convertStreamToString(is);
 
             Intent resultIntent = new Intent(ACTION_GET_MEAL_TYPES_RESULT);
             resultIntent.putExtra(EXTRA_MEAL_TYPES_RESULT, result);
+            Log.d(LOG_TAG, "The obj is: " + result);
 
             LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
 

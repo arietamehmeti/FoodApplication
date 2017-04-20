@@ -20,8 +20,8 @@ public class MealsNetworkDb extends SQLiteOpenHelper {
     private static final String SQL_CREATE_MEAL_TYPES =
             "CREATE TABLE " + MealsNetworkContract.MealType.TABLE_NAME + " (" +
                     MealsNetworkContract.MealType._ID + INT_TYPE + " PRIMARY KEY AUTOINCREMENT," +
-                    MealsNetworkContract.MealType.COLUMN_MEALTYPE_TITLE + TEXT_TYPE + COMMA_SEP +
-                    MealsNetworkContract.MealType.COLUMN_MEALTYPE_PRIORITY+ INT_TYPE +
+                    MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_TITLE + TEXT_TYPE + COMMA_SEP +
+                    MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_PRIORITY+ INT_TYPE +
                     " )";
     private static final String SQL_CREATE_MEAL=
             "CREATE TABLE " + MealsNetworkContract.Meal.TABLE_NAME + " (" +
