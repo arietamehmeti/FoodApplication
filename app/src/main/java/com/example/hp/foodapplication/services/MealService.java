@@ -13,24 +13,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Created by Hp on 4/17/2017.
+ * Created by Hp on 4/21/2017.
  */
 
-public class MealTypesService extends IntentService {
+public class MealService extends IntentService{
 
-    private static final String LOG_TAG = "MealTypesService";
+    private static final String LOG_TAG = "MealService";
 
-    public static final String ACTION_GET_MEAL_TYPES= "com.example.hp.foodapplication.GET_MEAL_TYPES";
+    public static final String ACTION_GET_MEAL= "com.example.hp.foodapplication.GET_MEAL";
 
-    public static final String ACTION_GET_MEAL_TYPES_RESULT = "com.example.hp.foodapplication.GET_MEAL_TYPES_RESULT";
+    public static final String ACTION_GET_MEAL_RESULT = "com.example.hp.foodapplication.GET_MEAL_RESULT";
 
-    public static final String EXTRA_MEAL_TYPES_RESULT = "mealTypes.result";
+    public static final String EXTRA_MEAL_RESULT = "meal.result";
 
-    private static final String GET_MEAL_TYPES_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types";
+    private static final String GET_MEAL_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types/{TYPE_ID}/meals";
 
 
-    public MealTypesService(){
-        super("Meal Types Service");
+    public MealService(){
+        super("Meal Service");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MealTypesService extends IntentService {
         Log.d(LOG_TAG, "on handle intent - service" );
 
         String action = intent.getAction();
-        if (ACTION_GET_MEAL_TYPES.equals(action)) {
+        if (ACTION_GET_MEAL.equals(action)) {
             getMealTypes(intent);
         } else {
             throw new UnsupportedOperationException("No implementation for action " + action);
@@ -46,12 +46,12 @@ public class MealTypesService extends IntentService {
     }
 
     private void getMealTypes(Intent intent) {
-        Log.d(LOG_TAG, "get meal typs mtd" );
+        Log.d(LOG_TAG, "get meal mtd" );
 
         InputStream is = null;
 
         try {
-            URL url = new URL(GET_MEAL_TYPES_URL);
+            URL url = new URL(GET_MEAL_URL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
@@ -68,8 +68,8 @@ public class MealTypesService extends IntentService {
             // Convert the InputStream into a bitmap
             String result = convertStreamToString(is);
 
-            Intent resultIntent = new Intent(ACTION_GET_MEAL_TYPES_RESULT);
-            resultIntent.putExtra(EXTRA_MEAL_TYPES_RESULT, result);
+            Intent resultIntent = new Intent(ACTION_GET_MEAL_RESULT);
+            resultIntent.putExtra(EXTRA_MEAL_RESULT, result);
             Log.d(LOG_TAG, "The obj is: " + result);
 
             LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
@@ -100,3 +100,4 @@ public class MealTypesService extends IntentService {
         return baos.toString();
     }
 }
+
