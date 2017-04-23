@@ -6,9 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.example.hp.foodapplication.Meals;
+import com.google.gson.Gson;
+
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -25,12 +30,24 @@ public class MealService extends IntentService{
     private static final String LOG_TAG = "MealService";
 
     public static final String ACTION_GET_MEAL= "com.example.hp.foodapplication.GET_MEAL";
+    public static final String ACTION_CREATE_MEAL= "com.example.hp.foodapplication.CREATE_MEAL";
 
     public static final String ACTION_GET_MEAL_RESULT = "com.example.hp.foodapplication.GET_MEAL_RESULT";
+    public static final String ACTION_CREATE_MEAL_RESULT = "com.example.hp.foodapplication.CREATE_MEAL_RESULT";
+
+    public static final String EXTRA_TITLE = "meal.title";
+    public static final String EXTRA_RECIPE = "meal.recipe";
+    public static final String EXTRA_NO_SERVINGS = "meal.servings";
+    public static final String EXTRA_PREP_TIME_HOUR = "meal.prepTimeHour";
+    public static final String EXTRA_PREP_TIME_MIN = "meal.prepTImeMin";
 
     public static final String EXTRA_MEAL_RESULT = "meal.result";
+    public static final String EXTRA_CREATE_MEAL_RESULT = "createMeal.result";
+
 
     private static String GET_MEAL_URL = "";
+    private static String CREATE_MEAL_URL = "";
+
 
 
     public MealService(){
@@ -44,9 +61,12 @@ public class MealService extends IntentService{
         Log.d(LOG_TAG, "on handle intent - service" + intent.getStringExtra(MEAL_TYPE));
 
         GET_MEAL_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types/"+ typeId +"/meals";
+        CREATE_MEAL_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types/"+ typeId +"/meals";
 
         String action = intent.getAction();
-        if (ACTION_GET_MEAL.equals(action)) {
+        if (ACTION_CREATE_MEAL.equals(action)){
+            insertMeal(intent);
+        }else if(ACTION_GET_MEAL.equals(action)) {
             getMealTypes(intent);
         } else {
             throw new UnsupportedOperationException("No implementation for action " + action);
@@ -68,14 +88,12 @@ public class MealService extends IntentService{
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
 
-            // Starts the query
             conn.connect();
 
             int response = conn.getResponseCode();
             Log.d(LOG_TAG, "The response is: " + response);
             is = conn.getInputStream();
 
-            // Convert the InputStream into a bitmap
             String result = convertStreamToString(is);
 
             Intent resultIntent = new Intent(ACTION_GET_MEAL_RESULT);
@@ -83,8 +101,6 @@ public class MealService extends IntentService{
 
             LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
 
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
         } catch (Exception e) {
             Log.e(LOG_TAG, "Exception fetching students", e);
         } finally {
@@ -96,6 +112,62 @@ public class MealService extends IntentService{
                 }
             }
         }
+    }
+
+
+    private void insertMeal(Intent intent){
+        try {
+            URL url = new URL(CREATE_MEAL_URL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(10000 /* milliseconds */);
+            conn.setConnectTimeout(15000 /* milliseconds */);
+            conn.setRequestMethod("POST");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            conn.addRequestProperty("Content-Type", "application/json");
+
+            String title = intent.getStringExtra(EXTRA_TITLE);
+            String recipe = intent.getStringExtra(EXTRA_RECIPE);
+            String noOfServings = intent.getStringExtra(EXTRA_NO_SERVINGS);
+            String prepTimeHour = intent.getStringExtra(EXTRA_PREP_TIME_HOUR);
+            String prepTimeMin = intent.getStringExtra(EXTRA_PREP_TIME_MIN);
+
+
+            Meals meal = new Meals();
+            meal.setTitle(title);
+            meal.setRecipe(recipe);
+            meal.setPrepTimeHour(prepTimeHour);
+            meal.setPrepTimeMinute(prepTimeMin);
+//            meal.setNumberOfServings(Integer.parseInt(noOfServings));
+
+            String studentJson = new Gson().toJson(meal);
+
+            Log.d(LOG_TAG, studentJson);
+
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
+            writer.write(studentJson);
+            writer.flush();
+            writer.close();
+
+            conn.getOutputStream().close();
+
+            // Starts the post
+            conn.connect();
+
+            int response = conn.getResponseCode();
+
+            Log.d(LOG_TAG, "The response is: " + response);
+
+            Intent resultIntent = new Intent(ACTION_CREATE_MEAL_RESULT);
+            resultIntent.putExtra(EXTRA_CREATE_MEAL_RESULT, "Created student. Server responded with status " + response);
+
+            LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
+
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Exception creating students", e);
+        }
+
     }
 
     private String convertStreamToString(InputStream is) throws IOException {

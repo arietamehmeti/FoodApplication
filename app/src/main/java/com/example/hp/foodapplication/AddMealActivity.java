@@ -1,5 +1,6 @@
 package com.example.hp.foodapplication;
 
+import android.app.IntentService;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.hp.foodapplication.db.MealsNetworkContract;
 import com.example.hp.foodapplication.db.MealsNetworkDb;
+import com.example.hp.foodapplication.services.MealService;
 
 import java.util.Date;
 
@@ -37,18 +39,19 @@ public class AddMealActivity extends AppCompatActivity {
 
         Button addBtn = (Button) findViewById(R.id.add_meal);
 
-        final EditText title = (EditText) findViewById( R.id.et_title);
-        final EditText recipe = (EditText) findViewById(R.id.et_recipe);
-        final EditText prepTimeHour = (EditText) findViewById(R.id.et_prep_time_hour);
-        final EditText prepTimeMin = (EditText) findViewById(R.id.et_prep_time_minute);
-        final EditText servings = (EditText) findViewById(R.id.et_servings);
+        final String title = ((EditText) findViewById( R.id.et_title)).getText().toString();
+        final String recipe = ((EditText) findViewById(R.id.et_recipe)).getText().toString();
+        final String prepTimeHour = ((EditText) findViewById(R.id.et_prep_time_hour)).getText().toString();
+        final String prepTimeMin =((EditText) findViewById(R.id.et_prep_time_minute)).getText().toString();
+        final String servings = ((EditText) findViewById(R.id.et_servings)).getText().toString();
 
 
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                insertMealToDb(title.getText().toString(), recipe.getText().toString(), Integer.parseInt(prepTimeHour.getText().toString()),
-                        Integer.parseInt(prepTimeMin.getText().toString()),  Integer.parseInt(servings.getText().toString()));
+//                insertMealToDb(title.getText().toString(), recipe.getText().toString(), Integer.parseInt(prepTimeHour.getText().toString()),
+//                        Integer.parseInt(prepTimeMin.getText().toString()),  Integer.parseInt(servings.getText().toString()));
+                insertMeal(title, recipe, servings, prepTimeHour, prepTimeMin);
             }
         });
     }
@@ -75,4 +78,19 @@ public class AddMealActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, "row (addMealAct): " + newRowId);
     }
+
+    private void insertMeal(String title, String recipe, String noOfServings, String prepTimeHour, String prepTimeMinute){
+        Intent intent = new Intent(this, MealService.class);
+        intent.setAction(MealService.ACTION_CREATE_MEAL);
+
+        intent.putExtra(MealService.MEAL_TYPE, String.valueOf(mealTypeId));
+        intent.putExtra(MealService.EXTRA_TITLE, title);
+        intent.putExtra(MealService.EXTRA_RECIPE, recipe);
+        intent.putExtra(MealService.EXTRA_NO_SERVINGS, noOfServings);
+        intent.putExtra(MealService.EXTRA_PREP_TIME_HOUR, prepTimeHour);
+        intent.putExtra(MealService.EXTRA_PREP_TIME_MIN, prepTimeMinute);
+
+        startService(intent);
+    }
+
 }

@@ -58,14 +58,12 @@ public class MealTypesService extends IntentService {
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
 
-            // Starts the query
             conn.connect();
 
             int response = conn.getResponseCode();
             Log.d(LOG_TAG, "The response is: " + response);
             is = conn.getInputStream();
 
-            // Convert the InputStream into a bitmap
             String result = convertStreamToString(is);
 
             Intent resultIntent = new Intent(ACTION_GET_MEAL_TYPES_RESULT);
@@ -74,8 +72,6 @@ public class MealTypesService extends IntentService {
 
             LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
 
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
         } catch (Exception e) {
             Log.e(LOG_TAG, "Exception fetching students", e);
         } finally {

@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void insertMealTypes(int id, String title, int priority) {
-        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         values.put(MealsNetworkContract.MealType._ID, id);
         values.put(MealsNetworkContract.MealType.COLUMN_MEAL_TYPE_TITLE, title);
@@ -74,12 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
         SQLiteDatabase dbHelper = db.getWritableDatabase();
 
-        // Insert the new row, returning the primary key value of the new row
         long newRowId;
         newRowId = dbHelper.insert(
-                MealsNetworkContract.MealType.TABLE_NAME, // the table to insert to
-                null, // nullColumnHack - if the values are empty you need this
-                values); // all the data to insert
+                MealsNetworkContract.MealType.TABLE_NAME,
+                null,
+                values);
 
         Log.d(LOG_TAG, "row : " + values.describeContents());
 
@@ -89,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase dbHelper = db.getReadableDatabase();
         MealTypes ml = new MealTypes();
         cursor = dbHelper.query(
-                MealsNetworkContract.MealType.TABLE_NAME,           // The table to query
-                PROJECTION,                                             // The columns to return
-                MealsNetworkContract.MealType._ID +"=?",                                                  // The columns for the WHERE clause
-                new String[]{String.valueOf(id)},                                                   // The values for the WHERE clause
-                null,                                                   // don't group the rows
-                null,                                                   // don't filter by row groups
-                null                                              // The sort order
+                MealsNetworkContract.MealType.TABLE_NAME,
+                PROJECTION,
+                MealsNetworkContract.MealType._ID +"=?",
+                new String[]{String.valueOf(id)},
+                null,
+                null,
+                null
         );
 
         while (cursor.moveToNext()) {
@@ -110,13 +108,13 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase dbHelper = db.getReadableDatabase();
 
         cursor = dbHelper.query(
-                MealsNetworkContract.MealType.TABLE_NAME,           // The table to query
-                PROJECTION,                                             // The columns to return
-                null,                                                   // The columns for the WHERE clause
-                null,                                                   // The values for the WHERE clause
-                null,                                                   // don't group the rows
-                null,                                                   // don't filter by row groups
-                SORT_ORDER                                              // The sort order
+                MealsNetworkContract.MealType.TABLE_NAME,
+                PROJECTION,
+                null,
+                null,
+                null,
+                null,
+                SORT_ORDER
         );
 
         //REMOVE
@@ -148,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
         db = MealsNetworkDb.getInstance(this);
         Log.d(LOG_TAG, "on create");
 
-
 //        getAllMealTypes();
         getAllMealTypesfromDB();
 
@@ -158,10 +155,8 @@ public class MainActivity extends AppCompatActivity {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
                 Intent intent = new Intent(MainActivity.this, MealsActivity.class);
-//                String option = ((TextView) view.findViewById(R.id.tv_meal_title)).getText().toString();
                 Log.d(LOG_TAG, ""+ getMealTypeById(id));
 
-//                intent.putExtra(MealsActivity.MEAL_TYPE,  option);
                 intent.putExtra(MealsActivity.MEAL_TYPE_ID, getMealTypeById(id));
                 startActivity(intent);
             }

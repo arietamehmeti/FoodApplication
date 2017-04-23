@@ -68,12 +68,12 @@ public class MealsActivity extends AppCompatActivity {
             for (int i = 0; i < meal.length; i++) {
                 Log.d(LOG_TAG, "to json" + meal[i]);
 //                meal[i].setMealType(Integer.parseInt(MEAL_TYPE_ID));
-                insertMeal(meal[i].getId(), meal[i].getTitle(), meal[i].getCreatedAt(), meal[i].getRecipe(),meal[i].getNumberOfServings(), meal[i].getPrepTimeHour(), meal[i].getMealType(), meal[i].getPrepTimeMinute() );
+                insertMeal(meal[i].getId(), meal[i].getTitle(), meal[i].getCreatedAt(), meal[i].getRecipe(),meal[i].getNumberOfServings(),meal[i].getPrepTimeHour(), meal[i].getMealType(), meal[i].getPrepTimeMinute() );
             }
         }
     };
 
-    private void insertMeal(int id, String title, double createdAt, String recipe, int servings, int prepTimeHour, MealTypes mealType, int prepTimeMin) {
+    private void insertMeal(int id, String title, double createdAt, String recipe, int servings, String prepTimeHour, MealTypes mealType, String prepTimeMin) {
         ContentValues values = new ContentValues();
         values.put(MealsNetworkContract.Meal._ID, id);
         values.put(MealsNetworkContract.Meal.COLUMN_MEAL_TITLE, title);
@@ -153,8 +153,8 @@ public class MealsActivity extends AppCompatActivity {
             mealSelected.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_TITLE)));
             mealSelected.setRecipe(cursor.getString(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_RECEIPE)));
             mealSelected.setNumberOfServings(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_NO_SERVINGS));
-            mealSelected.setPrepTimeHour(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_HOUR));
-            mealSelected.setPrepTimeMinute(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_MINUTE));
+            mealSelected.setPrepTimeHour(cursor.getString(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_HOUR)));
+            mealSelected.setPrepTimeMinute(cursor.getString(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_MINUTE)));
             mealSelected.setCreatedAt(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_CREATED_AT));
         }
 
