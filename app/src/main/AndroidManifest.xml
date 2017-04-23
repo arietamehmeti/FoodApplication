@@ -25,13 +25,15 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity android:name=".MealsActivity">
-        </activity>
+        <activity android:name=".MealsActivity" />
 
         <service
             android:name=".services.MealService"
             android:enabled="true"
             android:exported="false" />
+
+        <activity android:name=".MealRecipeActivity" />
+        <activity android:name=".AddMealActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hp.foodapplication.AddMealActivity">
+
+    <TextView
+        android:id="@+id/add_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title"/>
+
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_title"/>
+    <TextView
+        android:id="@+id/add_servings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/servings"
+        android:layout_below="@id/et_title"
+        />
+    <EditText
+        android:id="@+id/et_servings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_servings"/>
+    <TextView
+        android:id="@+id/add_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recipe"
+        android:layout_below="@id/et_servings"/>
+    <EditText
+        android:id="@+id/et_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_recipe"/>
+
+    <TextView
+        android:id="@+id/add_prep_time_hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/prep_time"
+        android:layout_below="@id/et_recipe"/>
+    <EditText
+        android:id="@+id/et_prep_time_hour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_prep_time_hour"/>
+
+    <TextView
+        android:id="@+id/add_prep_time_minute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/prep_time"
+        android:layout_below="@id/et_prep_time_hour"/>
+    <EditText
+        android:id="@+id/et_prep_time_minute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_prep_time_minute"/>
+
+    <Button
+        android:id="@+id/add_meal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_meal"
+        android:layout_below="@id/et_prep_time_minute"/>
+
+</RelativeLayout>

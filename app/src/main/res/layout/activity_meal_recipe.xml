@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hp.foodapplication.MealRecipeActivity">
+
+    <TextView
+        android:id="@+id/title_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:layout_alignParentTop="true"
+        />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_label"/>
+
+    <TextView
+        android:id="@+id/recipe_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/recipe"
+        android:layout_below="@id/title"/>
+
+    <TextView
+        android:id="@+id/recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recipe_label"/>
+
+    <TextView
+        android:id="@+id/servings_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/servings"
+        android:layout_below="@+id/recipe" />
+
+    <TextView
+        android:id="@+id/servings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/servings_label"/>
+
+    <TextView
+        android:id="@+id/prep_time_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/prep_time"
+        android:layout_below="@id/servings"/>
+
+    <TextView
+        android:id="@+id/prep_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/prep_time_label"/>
+
+    <TextView
+        android:id="@+id/creation_date_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/creation_date"
+        android:layout_below="@id/prep_time"/>
+
+    <TextView
+        android:id="@+id/creation_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/creation_date_label"
+    />
+
+</RelativeLayout>

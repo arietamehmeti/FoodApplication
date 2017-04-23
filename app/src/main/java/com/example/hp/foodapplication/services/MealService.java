@@ -18,7 +18,7 @@ import java.net.URL;
 
 public class MealService extends IntentService{
 
-    public static final String MEAL_TYPE = "";
+    public static final String MEAL_TYPE = "Meal Type extra";
 
     private static int typeId;
 
@@ -39,9 +39,10 @@ public class MealService extends IntentService{
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        Log.d(LOG_TAG, "on handle intent - service" );
 
         typeId = Integer.parseInt(intent.getStringExtra(MEAL_TYPE));
+        Log.d(LOG_TAG, "on handle intent - service" + intent.getStringExtra(MEAL_TYPE));
+
         GET_MEAL_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types/"+ typeId +"/meals";
 
         String action = intent.getAction();
