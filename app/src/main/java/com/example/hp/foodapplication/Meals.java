@@ -1,10 +1,12 @@
 package com.example.hp.foodapplication;
 
+import java.io.Serializable;
+
 /**
  * Created by Hp on 4/21/2017.
  */
 
-public class Meals {
+public class Meals{
 
     private int id;
     private String title;
@@ -12,7 +14,7 @@ public class Meals {
     private int numberOfServings;
     private int prepTimeHour;
     private int getPrepTimeMinute;
-    private int createdAt;
+    private double createdAt;
     private int mealType;
 
     public int getId() {return id;}
@@ -39,7 +41,7 @@ public class Meals {
 
     public void setGetPrepTimeMinute(int getPrepTimeMinute) {this.getPrepTimeMinute = getPrepTimeMinute;}
 
-    public int getCreatedAt() {return createdAt;}
+    public double getCreatedAt() {return createdAt;}
 
     public void setCreatedAt(int createdAt) {this.createdAt = createdAt;}
 

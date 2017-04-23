@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">FoodApplication</string>
-    <string name="tv_meal_title"> title</string>
+    <string name="tv_meal_title"> </string>
 </resources>

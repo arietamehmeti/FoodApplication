@@ -18,6 +18,10 @@ import java.net.URL;
 
 public class MealService extends IntentService{
 
+    public static final String MEAL_TYPE = "";
+
+    private static int typeId;
+
     private static final String LOG_TAG = "MealService";
 
     public static final String ACTION_GET_MEAL= "com.example.hp.foodapplication.GET_MEAL";
@@ -26,7 +30,7 @@ public class MealService extends IntentService{
 
     public static final String EXTRA_MEAL_RESULT = "meal.result";
 
-    private static final String GET_MEAL_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types/{TYPE_ID}/meals";
+    private static String GET_MEAL_URL = "";
 
 
     public MealService(){
@@ -36,6 +40,9 @@ public class MealService extends IntentService{
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         Log.d(LOG_TAG, "on handle intent - service" );
+
+        typeId = Integer.parseInt(intent.getStringExtra(MEAL_TYPE));
+        GET_MEAL_URL = "http://clubs-sdmdcity.rhcloud.com/rest/types/"+ typeId +"/meals";
 
         String action = intent.getAction();
         if (ACTION_GET_MEAL.equals(action)) {
@@ -52,6 +59,8 @@ public class MealService extends IntentService{
 
         try {
             URL url = new URL(GET_MEAL_URL);
+            Log.d(LOG_TAG, "GET_MEAL_URL :  " + GET_MEAL_URL);
+
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(10000 /* milliseconds */);
             conn.setConnectTimeout(15000 /* milliseconds */);
@@ -70,7 +79,6 @@ public class MealService extends IntentService{
 
             Intent resultIntent = new Intent(ACTION_GET_MEAL_RESULT);
             resultIntent.putExtra(EXTRA_MEAL_RESULT, result);
-            Log.d(LOG_TAG, "The obj is: " + result);
 
             LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
 
