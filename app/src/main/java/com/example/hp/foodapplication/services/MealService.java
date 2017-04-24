@@ -137,9 +137,9 @@ public class MealService extends IntentService{
             Meals meal = new Meals();
             meal.setTitle(title);
             meal.setRecipe(recipe);
-            meal.setPrepTimeHour(prepTimeHour);
-            meal.setPrepTimeMinute(prepTimeMin);
-//            meal.setNumberOfServings(Integer.parseInt(noOfServings));
+            meal.setPrepTimeHour(Integer.parseInt(prepTimeHour));
+            meal.setPrepTimeMinute(Integer.parseInt(prepTimeMin));
+            meal.setNumberOfServings(Integer.parseInt(noOfServings));
 
             String studentJson = new Gson().toJson(meal);
 

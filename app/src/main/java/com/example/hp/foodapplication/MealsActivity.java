@@ -73,7 +73,7 @@ public class MealsActivity extends AppCompatActivity {
         }
     };
 
-    private void insertMeal(int id, String title, double createdAt, String recipe, int servings, String prepTimeHour, MealTypes mealType, String prepTimeMin) {
+    private void insertMeal(int id, String title, double createdAt, String recipe, int servings, int prepTimeHour, MealTypes mealType, int prepTimeMin) {
         ContentValues values = new ContentValues();
         values.put(MealsNetworkContract.Meal._ID, id);
         values.put(MealsNetworkContract.Meal.COLUMN_MEAL_TITLE, title);
@@ -153,8 +153,8 @@ public class MealsActivity extends AppCompatActivity {
             mealSelected.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_TITLE)));
             mealSelected.setRecipe(cursor.getString(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_RECEIPE)));
             mealSelected.setNumberOfServings(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_NO_SERVINGS));
-            mealSelected.setPrepTimeHour(cursor.getString(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_HOUR)));
-            mealSelected.setPrepTimeMinute(cursor.getString(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_MINUTE)));
+            mealSelected.setPrepTimeHour(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_HOUR));
+            mealSelected.setPrepTimeMinute(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_MINUTE));
             mealSelected.setCreatedAt(cursor.getColumnIndexOrThrow(MealsNetworkContract.Meal.COLUMN_MEAL_CREATED_AT));
         }
 

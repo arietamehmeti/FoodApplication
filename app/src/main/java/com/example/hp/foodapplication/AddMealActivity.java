@@ -41,9 +41,9 @@ public class AddMealActivity extends AppCompatActivity {
 
         final String title = ((EditText) findViewById( R.id.et_title)).getText().toString();
         final String recipe = ((EditText) findViewById(R.id.et_recipe)).getText().toString();
-        final String prepTimeHour = ((EditText) findViewById(R.id.et_prep_time_hour)).getText().toString();
-        final String prepTimeMin =((EditText) findViewById(R.id.et_prep_time_minute)).getText().toString();
-        final String servings = ((EditText) findViewById(R.id.et_servings)).getText().toString();
+        final int prepTimeHour = Integer.parseInt(((EditText) findViewById(R.id.et_prep_time_hour)).getText().toString());
+        final int prepTimeMin = Integer.parseInt(((EditText) findViewById(R.id.et_prep_time_minute)).getText().toString());
+        final int servings = Integer.parseInt(((EditText) findViewById(R.id.et_servings)).getText().toString());
 
 
 
@@ -79,7 +79,7 @@ public class AddMealActivity extends AppCompatActivity {
         Log.d(LOG_TAG, "row (addMealAct): " + newRowId);
     }
 
-    private void insertMeal(String title, String recipe, String noOfServings, String prepTimeHour, String prepTimeMinute){
+    private void insertMeal(String title, String recipe, int noOfServings, int prepTimeHour, int prepTimeMinute){
         Intent intent = new Intent(this, MealService.class);
         intent.setAction(MealService.ACTION_CREATE_MEAL);
 

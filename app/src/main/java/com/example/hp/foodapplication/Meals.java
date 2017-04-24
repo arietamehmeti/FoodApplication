@@ -23,10 +23,10 @@ public class Meals implements Serializable{
     private int numberOfServings;
 
     @SerializedName("prepTimeHour")
-    private String prepTimeHour;
+    private int prepTimeHour;
 
     @SerializedName("getPrepTimeMinute")
-    private String getPrepTimeMinute;
+    private int getPrepTimeMinute;
 
     @SerializedName("createdAt")
     private double createdAt;
@@ -51,13 +51,13 @@ public class Meals implements Serializable{
 
     public void setNumberOfServings(int numberOfServings) {this.numberOfServings = numberOfServings;}
 
-    public String getPrepTimeHour() {return prepTimeHour;}
+    public int getPrepTimeHour() {return prepTimeHour;}
 
-    public void setPrepTimeHour(String prepTimeHour) {this.prepTimeHour = prepTimeHour;}
+    public void setPrepTimeHour(int prepTimeHour) {this.prepTimeHour = prepTimeHour;}
 
-    public String getPrepTimeMinute() {return getPrepTimeMinute;}
+    public int getPrepTimeMinute() {return getPrepTimeMinute;}
 
-    public void setPrepTimeMinute(String getPrepTimeMinute) {this.getPrepTimeMinute = getPrepTimeMinute;}
+    public void setPrepTimeMinute(int getPrepTimeMinute) {this.getPrepTimeMinute = getPrepTimeMinute;}
 
     public double getCreatedAt() {return createdAt;}
 
