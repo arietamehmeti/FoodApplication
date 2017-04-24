@@ -34,6 +34,12 @@
 
         <activity android:name=".MealRecipeActivity" />
         <activity android:name=".AddMealActivity"></activity>
+
+        <receiver android:name=".ConnectionStateReceiver" android:label="NetworkConnection">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

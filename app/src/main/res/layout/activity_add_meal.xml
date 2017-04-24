@@ -45,7 +45,7 @@
         android:id="@+id/add_prep_time_hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/prep_time"
+        android:text="@string/prep_hour"
         android:layout_below="@id/et_recipe"/>
     <EditText
         android:id="@+id/et_prep_time_hour"
@@ -57,7 +57,7 @@
         android:id="@+id/add_prep_time_minute"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/prep_time"
+        android:text="@string/prep_min"
         android:layout_below="@id/et_prep_time_hour"/>
     <EditText
         android:id="@+id/et_prep_time_minute"

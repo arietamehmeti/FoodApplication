@@ -11,6 +11,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.example.hp.foodapplication.MealTypes;
 import com.example.hp.foodapplication.Meals;
 import com.google.gson.Gson;
 
@@ -21,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 /**
  * Created by Hp on 4/21/2017.
@@ -29,9 +31,7 @@ import java.net.URL;
 public class MealService extends IntentService{
 
     public static final String MEAL_TYPE = "Meal Type extra";
-
     private static int typeId;
-
     private static final String LOG_TAG = "MealService";
 
     public static final String ACTION_GET_MEAL= "com.example.hp.foodapplication.GET_MEAL";
@@ -41,10 +41,12 @@ public class MealService extends IntentService{
     public static final String ACTION_CREATE_MEAL_RESULT = "com.example.hp.foodapplication.CREATE_MEAL_RESULT";
 
     public static final String EXTRA_TITLE = "meal.title";
+    public static final String EXTRA_MEAL_TYPE = "meal.mealType";
     public static final String EXTRA_RECIPE = "meal.recipe";
     public static final String EXTRA_NO_SERVINGS = "meal.servings";
     public static final String EXTRA_PREP_TIME_HOUR = "meal.prepTimeHour";
     public static final String EXTRA_PREP_TIME_MIN = "meal.prepTImeMin";
+    public static final String EXTRA_CREATED_AT = "meal.createdAt";
 
     public static final String EXTRA_MEAL_RESULT = "meal.result";
     public static final String EXTRA_CREATE_MEAL_RESULT = "createMeal.result";
@@ -53,8 +55,6 @@ public class MealService extends IntentService{
     private static String CREATE_MEAL_URL = "";
 
     private static final int PROGRESS_NOTIFICATION_ID = 187;
-
-
 
     public MealService(){
         super("Meal Service");
@@ -80,8 +80,6 @@ public class MealService extends IntentService{
     }
 
     private void getMealTypes(Intent intent) {
-        Log.d(LOG_TAG, "get meal mtd" );
-
         InputStream is = null;
 
         try {
@@ -138,14 +136,21 @@ public class MealService extends IntentService{
             String noOfServings = intent.getStringExtra(EXTRA_NO_SERVINGS);
             String prepTimeHour = intent.getStringExtra(EXTRA_PREP_TIME_HOUR);
             String prepTimeMin = intent.getStringExtra(EXTRA_PREP_TIME_MIN);
+            String createdAt = intent.getStringExtra(EXTRA_CREATED_AT);
+            MealTypes mealType = (MealTypes) intent.getSerializableExtra(MealService.EXTRA_MEAL_TYPE);
 
+            Random r = new Random();//REMOVE SOME TIME
+            int i1 = r.nextInt(80 - 65) + 65;
 
             Meals meal = new Meals();
+            meal.setId(i1);
             meal.setTitle(title);
             meal.setRecipe(recipe);
             meal.setPrepTimeHour(Integer.parseInt(prepTimeHour));
             meal.setPrepTimeMinute(Integer.parseInt(prepTimeMin));
             meal.setNumberOfServings(Integer.parseInt(noOfServings));
+            meal.setCreatedAt(Long.parseLong(createdAt));
+            meal.setMealType(mealType);
 
             String studentJson = new Gson().toJson(meal);
 
@@ -172,7 +177,7 @@ public class MealService extends IntentService{
             LocalBroadcastManager.getInstance(this).sendBroadcast(resultIntent);
 
         } catch (Exception e) {
-            Log.e(LOG_TAG, "Exception creating students", e);
+            Log.e(LOG_TAG, "Exception creating MEALS", e);
         }
 
     }

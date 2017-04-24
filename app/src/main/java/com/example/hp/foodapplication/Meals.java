@@ -25,11 +25,11 @@ public class Meals implements Serializable{
     @SerializedName("prepTimeHour")
     private int prepTimeHour;
 
-    @SerializedName("getPrepTimeMinute")
+    @SerializedName("prepTimeMinute")
     private int getPrepTimeMinute;
 
     @SerializedName("createdAt")
-    private double createdAt;
+    private long createdAt;
 
     @SerializedName("mealType")
     private MealTypes mealType;
@@ -59,9 +59,9 @@ public class Meals implements Serializable{
 
     public void setPrepTimeMinute(int getPrepTimeMinute) {this.getPrepTimeMinute = getPrepTimeMinute;}
 
-    public double getCreatedAt() {return createdAt;}
+    public long getCreatedAt() {return createdAt;}
 
-    public void setCreatedAt(int createdAt) {this.createdAt = createdAt;}
+    public void setCreatedAt(long createdAt) {this.createdAt = createdAt;}
 
     public MealTypes getMealType() {return mealType;}
 

@@ -50,7 +50,7 @@
         android:id="@+id/prep_time_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/prep_time"
+        android:text="@string/prep_hour"
         android:layout_below="@id/servings"/>
 
     <TextView

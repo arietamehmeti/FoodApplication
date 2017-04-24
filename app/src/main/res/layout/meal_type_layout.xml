@@ -6,6 +6,9 @@
     <TextView
         android:id = "@+id/tv_meal_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        />
 
 </LinearLayout>

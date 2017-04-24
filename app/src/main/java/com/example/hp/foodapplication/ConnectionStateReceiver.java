@@ -16,17 +16,17 @@ import com.example.hp.foodapplication.services.MealService;
  * Created by Hp on 4/24/2017.
  */
 
-public class WifiStateReceiver extends BroadcastReceiver {
+public class ConnectionStateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
-            sendCachedActivities(context.getApplicationContext());
+            sendCachedMeals(context.getApplicationContext());
         }
     }
 
-    static void sendCachedActivities(Context context) {
+    static void sendCachedMeals(Context context) {
 
         MealsNetworkDb dbHelper = MealsNetworkDb.getInstance(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();

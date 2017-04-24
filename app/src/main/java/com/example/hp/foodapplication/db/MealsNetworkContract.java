@@ -9,7 +9,6 @@ import android.provider.BaseColumns;
 public final class MealsNetworkContract {
 
     private MealsNetworkContract(){
-
     }
     public static abstract class MealType implements BaseColumns {
         public static final String TABLE_NAME = "meal_type";
@@ -25,6 +24,7 @@ public final class MealsNetworkContract {
         public static final String COLUMN_MEAL_PREP_TIME_MINUTE = "prep_time_minute";
         public static final String COLUMN_MEAL_CREATED_AT = "created_at";
         public static final String COLUMN_MEAL_TYPE = "meal_type";
+        public static final String COLUMN_NAME_STATUS = "0";
     }
 
 }

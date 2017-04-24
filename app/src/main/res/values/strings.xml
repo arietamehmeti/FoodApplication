@@ -5,11 +5,13 @@
 
     <string name="title">Title: </string>
     <string name="recipe">Recipe: </string>
-    <string name="prep_time">Preperation time:</string>
+    <string name="prep_hour">Preperation hour:</string>
+    <string name="prep_min">Preperation minute:</string>
     <string name="creation_date">Created on:</string>
     <string name="servings">No. of servings:</string>
     <string name="add_meal_btn">Add a meal</string>
     <string name="add_meal">Add</string>
+    <string name="notify_refresh">Please pull to display meals options</string>
 
 
 </resources>

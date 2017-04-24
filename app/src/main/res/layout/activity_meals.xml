@@ -6,16 +6,38 @@
     android:layout_height="match_parent"
     tools:context="com.example.hp.foodapplication.MealsActivity">
 
+    <TextView
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="@color/colorTextWhite"
+        android:text=""
+        android:background="@color/colorHeader"
+        android:gravity="center"
+        />
+
     <Button
         android:id="@+id/add_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_meal_btn"/>
+        android:text="@string/add_meal_btn"
+        android:background="@color/colorButtons"
+        android:textColor="@color/colorTextWhite"
+        android:layout_below="@id/tab"
+        />
 
-    <ListView android:id="@+id/lv_meals_results"
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_meals"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/add_button"
-        />
+        android:layout_below="@id/add_button">
+
+        <ListView android:id="@+id/lv_meals_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackgrounds"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

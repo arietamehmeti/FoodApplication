@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.hp.foodapplication.MainActivity">
 
+    <TextView
+        android:id="@+id/notify_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/notify_refresh"
+        />
+
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_meal_types"
@@ -15,6 +22,7 @@
     <ListView android:id="@+id/lv_results"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorBackgrounds"
         />
 
     </android.support.v4.widget.SwipeRefreshLayout>

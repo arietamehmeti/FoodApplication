@@ -35,8 +35,8 @@ public class MealsNetworkDb extends SQLiteOpenHelper {
                     MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_HOUR+ INT_TYPE + COMMA_SEP +
                     MealsNetworkContract.Meal.COLUMN_MEAL_PREP_TIME_MINUTE+ INT_TYPE + COMMA_SEP +
                     MealsNetworkContract.Meal.COLUMN_MEAL_CREATED_AT+ REAL_TYPE + COMMA_SEP +
-                    MealsNetworkContract.Meal.COLUMN_MEAL_TYPE+ INT_TYPE +
-
+                    MealsNetworkContract.Meal.COLUMN_MEAL_TYPE+ INT_TYPE + COMMA_SEP +
+                    MealsNetworkContract.Meal.COLUMN_NAME_STATUS + INT_TYPE +
                     " )";
 
     private static final String SQL_DELETE_MEAL_TYPES =

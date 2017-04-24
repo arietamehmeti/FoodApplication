@@ -17,19 +17,27 @@ public class MealRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_recipe);
 
+        DateUtility util = new DateUtility();
+
         Intent intent = getIntent();
         Meals ml = (Meals) intent.getSerializableExtra(MEAL_SELECTED);
-        Log.d(LOG_TAG, ml.toString());
+
+        Log.d(LOG_TAG, "" + ml.getPrepTimeHour()+ " minute " + ml.getPrepTimeMinute() );
+
 
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(ml.getTitle());
+
         TextView recipe = (TextView) findViewById(R.id.recipe);
         recipe.setText(ml.getRecipe());
+
         TextView servings = (TextView) findViewById(R.id.servings);
         servings.setText(String.valueOf(ml.getNumberOfServings()));
+
         TextView prep_time = (TextView) findViewById(R.id.prep_time);
-        prep_time.setText(String.valueOf(ml.getPrepTimeHour()));
+        prep_time.setText(String.valueOf(ml.getPrepTimeHour()) + " : " + String.valueOf(ml.getPrepTimeMinute()));
+
         TextView creation_date= (TextView) findViewById(R.id.creation_date);
-        creation_date.setText(String.valueOf(ml.getCreatedAt()));
+        creation_date.setText(String.valueOf(util.millisecsToDate(ml.getCreatedAt())));
     }
 }
