@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.content.LocalBroadcastManager;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,10 +19,12 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+
 import com.example.hp.foodapplication.db.MealsNetworkContract;
 import com.example.hp.foodapplication.db.MealsNetworkDb;
 import com.example.hp.foodapplication.services.MealService;
 import com.google.gson.Gson;
+
 
 public class MealsActivity extends AppCompatActivity {
 
@@ -31,6 +34,7 @@ public class MealsActivity extends AppCompatActivity {
     private MealsNetworkDb db;
     private CursorAdapter adapter;
     private Cursor cursor;
+
 
     private static final String[] PROJECTION = {
             MealsNetworkContract.Meal._ID,
@@ -202,7 +206,8 @@ public class MealsActivity extends AppCompatActivity {
         });
     }
 
-    @Override
+
+        @Override
     protected void onResume() {
         super.onResume();
 

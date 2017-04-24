@@ -1,8 +1,13 @@
 package com.example.hp.foodapplication.services;
 
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
@@ -44,9 +49,10 @@ public class MealService extends IntentService{
     public static final String EXTRA_MEAL_RESULT = "meal.result";
     public static final String EXTRA_CREATE_MEAL_RESULT = "createMeal.result";
 
-
     private static String GET_MEAL_URL = "";
     private static String CREATE_MEAL_URL = "";
+
+    private static final int PROGRESS_NOTIFICATION_ID = 187;
 
 
 
@@ -157,6 +163,7 @@ public class MealService extends IntentService{
 
             int response = conn.getResponseCode();
 
+            sendNotification(response);
             Log.d(LOG_TAG, "The response is: " + response);
 
             Intent resultIntent = new Intent(ACTION_CREATE_MEAL_RESULT);
@@ -168,6 +175,36 @@ public class MealService extends IntentService{
             Log.e(LOG_TAG, "Exception creating students", e);
         }
 
+    }
+    private void sendNotification(int response) {
+        Intent intent = new Intent(this, MealService.class);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        String message;
+        String contentTitle = "New Meal";
+
+
+        if(response == 204){
+            message = "Your meal has been successfully created!";
+        } else {
+            message = "Failed to create your meal.";
+        }
+
+        Notification notification = new NotificationCompat.Builder(this)
+                .setSmallIcon(android.R.drawable.stat_notify_error)
+                .setTicker(message)
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle(contentTitle)
+                .setContentText(message)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .build();
+
+        NotificationManager activityNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        activityNotificationManager.notify(PROGRESS_NOTIFICATION_ID, notification);
     }
 
     private String convertStreamToString(InputStream is) throws IOException {
