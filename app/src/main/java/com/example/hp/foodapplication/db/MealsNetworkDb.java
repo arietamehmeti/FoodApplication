@@ -50,10 +50,6 @@ public class MealsNetworkDb extends SQLiteOpenHelper {
     }
 
     public static synchronized MealsNetworkDb getInstance(Context context) {
-
-        // Use the application context, which will ensure that you
-        // don't accidentally leak an Activity's context.
-        // See this article for more information: http://bit.ly/6LRzfx
         if (sInstance == null) {
             sInstance = new MealsNetworkDb(context.getApplicationContext());
         }
@@ -66,8 +62,6 @@ public class MealsNetworkDb extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // This database is only a cache for online data, so its upgrade
-        // policy is to simply discard the data and start over
         db.execSQL(SQL_DELETE_MEAL_TYPES);
         db.execSQL(SQL_DELETE_MEAL);
         onCreate(db);
