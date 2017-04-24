@@ -183,16 +183,19 @@ public class MealService extends IntentService{
 
         String message;
         String contentTitle = "New Meal";
+        int notificationIcon;
 
 
         if(response == 204){
             message = "Your meal has been successfully created!";
+            notificationIcon = android.R.drawable.stat_sys_upload_done;
         } else {
             message = "Failed to create your meal.";
+            notificationIcon = android.R.drawable.stat_notify_error;
         }
 
         Notification notification = new NotificationCompat.Builder(this)
-                .setSmallIcon(android.R.drawable.stat_notify_error)
+                .setSmallIcon(notificationIcon)
                 .setTicker(message)
                 .setWhen(System.currentTimeMillis())
                 .setContentTitle(contentTitle)
