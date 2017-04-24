@@ -180,7 +180,7 @@ public class MealsActivity extends AppCompatActivity {
 
         Log.d(LOG_TAG, ""+ mealType.getName());
 
-//        getAllMeals(mealType.getId());
+         // getAllMeals(mealType.getId());
         getAllMealsfromDB(mealType.getId());
 
         ListView listview = (ListView) findViewById(R.id.lv_meals_results);

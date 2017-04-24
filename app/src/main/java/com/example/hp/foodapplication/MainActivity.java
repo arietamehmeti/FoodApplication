@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private MealsNetworkDb db;
     private CursorAdapter adapter;
     private Cursor cursor;
+    private SwipeRefreshLayout swipeMealTypes;
 
 
     private BroadcastReceiver getAllMealTypesResultBroadcastReceiver = new BroadcastReceiver() {
@@ -146,8 +148,16 @@ public class MainActivity extends AppCompatActivity {
         db = MealsNetworkDb.getInstance(this);
         Log.d(LOG_TAG, "on create");
 
-//        getAllMealTypes();
-        getAllMealTypesfromDB();
+        swipeMealTypes = (SwipeRefreshLayout) findViewById(R.id.swipe_meal_types);
+        swipeMealTypes.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getAllMealTypes();
+            }
+        });
+
+            //getAllMealTypes();
+         getAllMealTypesfromDB();
 
         ListView listview = (ListView) findViewById(R.id.lv_results);
 
